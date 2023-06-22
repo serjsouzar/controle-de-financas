@@ -22,7 +22,7 @@ export function Form({ handleAdd, transactionList, setTransactionList }) {
       id: generateId(),
       desc: desc,
       amount: amount,
-      isCheck: isCheck,
+      outcome: isCheck,
     };
 
     handleAdd(transaction);

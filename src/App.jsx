@@ -5,7 +5,7 @@ import { GlobalStyle } from "./styles/global";
 import { useState, useEffect } from "react";
 
 export default function App() {
-  const data = localStorage.getItem("transactions");
+  const data = localStorage.getItem("transaction");
   const [transactionList, setTransactionList] = useState(
     data ? JSON.parse(data) : []
   );
@@ -37,7 +37,7 @@ export default function App() {
     setIncome(`R$ ${incomeTotal}`);
     setOutcome(`R$ ${outcomeTotal}`);
     setTotal(
-      `${incomeTotal > outcomeTotal ? "-" : ""} R$ ${amountTotal}`
+      `${incomeTotal < outcomeTotal ? "-" : ""} R$ ${amountTotal}`
     );
   }, [transactionList]);
 
@@ -48,7 +48,7 @@ export default function App() {
 
     setTransactionList(newArrayTransaction);
 
-    localStorage.setItem("transactions", JSON.stringify(newArrayTransaction));
+    localStorage.setItem("transaction", JSON.stringify(newArrayTransaction));
   }
 
   return (
