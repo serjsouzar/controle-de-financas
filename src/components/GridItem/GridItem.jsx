@@ -6,10 +6,14 @@ import {
 } from "react-icons/fa";
 
 export function GridItem({ item, onDelete }) {
+
+  const amountDecimal = item.amount
+  console.log(parseFloat(amountDecimal).toFixed(2))
+
   return (
     <C.Tr>
       <C.Td>{item.desc}</C.Td>
-      <C.Td>{item.amount}</C.Td>
+      <C.Td>{parseFloat(amountDecimal).toFixed(2)}</C.Td>
       <C.Td alignCenter>
         {item.outcome ? (
           <FaRegArrowAltCircleDown color="red" />

@@ -49,6 +49,7 @@ export default function App() {
     setTransactionList(newArrayTransaction);
 
     localStorage.setItem("transaction", JSON.stringify(newArrayTransaction));
+    
   }
 
   return (
