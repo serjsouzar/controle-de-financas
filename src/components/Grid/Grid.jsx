@@ -34,7 +34,7 @@ export function Grid({ itens, setItens }) {
             getResultsApi();
           } else {
             alert(
-              "Falha ao deletar o item selecionado. Por gentileza remarcar o checkbox."
+              "Falha ao deletar o item."
             );
           }
         });
