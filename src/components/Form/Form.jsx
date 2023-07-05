@@ -20,9 +20,9 @@ export function Form({ handleAdd, transactionList, setTransactionList }) {
 
     const transaction = {
       id: generateId(),
-      desc: desc,
-      amount: amount,
-      outcome: isCheck,
+      title: desc,
+      value: amount,
+      outcome: isCheck
     };
 
     handleAdd(transaction);
