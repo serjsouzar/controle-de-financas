@@ -1,17 +1,12 @@
-import { useState } from "react";
 import { GridItem } from "../GridItem/GridItem";
 import * as C from "./styles";
 
-
 export function Grid({ itens, setItens }) {
-  const [titleCheckbox, setTitleCheckbox] = useState(false);
-
   function getResultsApi() {
-
     fetch("https://controle-de-financas-backend.onrender.com/api/finances")
       .then((response) => response.json())
-      .then((response) => {        
-        return setItens(response.amount)        
+      .then((response) => {
+        return setItens(response.amount);
       });
   }
 
@@ -19,7 +14,7 @@ export function Grid({ itens, setItens }) {
     const selectedAmount = id;
     if (selectedAmount) {
       try {
-          await fetch(
+        await fetch(
           `https://controle-de-financas-backend.onrender.com/api/finances/${selectedAmount}`,
           {
             method: "DELETE",
@@ -29,29 +24,27 @@ export function Grid({ itens, setItens }) {
             body: JSON.stringify({ id: selectedAmount }),
           }
         ).then((response) => {
-          if (response.ok && titleCheckbox === true) {
-            
+          if (response.ok) {
             const newArray = itens.filter(
               (transaction) => transaction._id !== selectedAmount
             );
-            
+
             setItens(newArray);
-            setTitleCheckbox(false)
-            
-            getResultsApi()  
+
+            getResultsApi();
           } else {
-            alert("Falha ao deletar o item selecionado. Por gentileza remarcar o checkbox.");
+            alert(
+              "Falha ao deletar o item selecionado. Por gentileza remarcar o checkbox."
+            );
           }
         });
       } catch (error) {
         console.error("Ocorreu um erro ao deletar o componente:", error);
       }
-    } else if(titleCheckbox === false){
-      return
+    } else if (!selectedAmount) {
+      return;
     }
-    
   };
-  
 
   return (
     <C.Table>
@@ -67,13 +60,7 @@ export function Grid({ itens, setItens }) {
       </C.Thead>
       <C.Tbody>
         {itens.map((item) => (
-          <GridItem
-            key={item._id}
-            item={item}
-            onDelete={onDelete}
-            titleCheckbox={titleCheckbox}
-            setTitleCheckbox={setTitleCheckbox}
-          />
+          <GridItem key={item._id} item={item} onDelete={onDelete} />
         ))}
       </C.Tbody>
     </C.Table>

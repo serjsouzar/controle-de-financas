@@ -5,21 +5,12 @@ import {
   FaTrash,
 } from "react-icons/fa";
 
-export function GridItem({ item, onDelete, titleCheckbox, setTitleCheckbox}) {
-
-
-  function handleChangeCheckBox(){
-    if (titleCheckbox === false) setTitleCheckbox(!titleCheckbox)
-  }
-
-  const amountDecimal = item.value
+export function GridItem({ item, onDelete }) {
+  const amountDecimal = item.value;
 
   return (
     <C.Tr>
-      <C.Td>
-        <input className="desc-checkbox" type="checkbox" defaultValue={false} onChange={handleChangeCheckBox}/>  
-        {item.title}
-      </C.Td>
+      <C.Td>{item.title}</C.Td>
       <C.Td>{parseFloat(amountDecimal).toFixed(2)}</C.Td>
       <C.Td alignCenter>
         {item.outcome ? (
