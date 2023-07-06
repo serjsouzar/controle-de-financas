@@ -25,6 +25,8 @@ export default function App() {
       });
   }
 
+  
+  
   useEffect((transaction) => {
     getResultsApi(transaction)
   },[]) 
@@ -52,7 +54,7 @@ export default function App() {
     setIncome(`R$ ${incomeTotal}`);
     setOutcome(`R$ ${outcomeTotal}`);
 
-    setTotal(`${incomeTotal < outcomeTotal ? "-" : ""} R$ ${amountTotal}`);
+    setTotal(`${Number(incomeTotal) < Number(outcomeTotal) ? "-" : ""} R$ ${amountTotal}`);
   }, [transactionList]);
 
 
