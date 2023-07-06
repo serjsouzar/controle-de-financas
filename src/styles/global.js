@@ -11,4 +11,11 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #f2f2f2;
   }
 
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+  }
+
 ` 

@@ -1,10 +1,13 @@
 import { Form } from "./components/Form/Form";
 import { Header } from "./components/Header/Header";
 import { Resume } from "./components/Resume/Resume";
+import MoonLoader from "react-spinners/MoonLoader";
 import { GlobalStyle } from "./styles/global";
 import { useState, useEffect } from "react";
 
 export default function App() {
+
+  const [loading, setLoading] = useState(false);
   
   const [income, setIncome] = useState(0);
   const [outcome, setOutcome] = useState(0);
@@ -13,10 +16,11 @@ export default function App() {
   const [transactionList, setTransactionList] = useState([]);
 
   function getResultsApi() {
-
+    setLoading(true);
     fetch("https://controle-de-financas-backend.onrender.com/api/finances")
       .then((response) => response.json())
-      .then((response) => {        
+      .then((response) => {
+        setLoading(false);        
         return setTransactionList(response.amount)        
       });
   }
@@ -47,12 +51,13 @@ export default function App() {
 
     setIncome(`R$ ${incomeTotal}`);
     setOutcome(`R$ ${outcomeTotal}`);
-    
+
     setTotal(`${incomeTotal < outcomeTotal ? "-" : ""} R$ ${amountTotal}`);
   }, [transactionList]);
 
 
   function handleAdd(transaction) {
+    setLoading(true);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -70,7 +75,16 @@ export default function App() {
     }
 
 
-  return (
+  return loading ? (
+    <>
+      <Header />
+      <Resume income={income} outcome={outcome} total={total} />
+      <div className="loader">
+      <MoonLoader color={"black"} loading={loading} size={80} />
+      </div>
+      <GlobalStyle />
+    </>
+  ) : (
     <>
       <Header />
       <Resume income={income} outcome={outcome} total={total} />
